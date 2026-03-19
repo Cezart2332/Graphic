@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cqow47bch5ocs"]
+
+[ext_resource type="Script" uid="uid://dfvkkylpy5if8" path="res://scripts/Player.cs" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://licaaapocl7d" path="res://resources/character/cac-1773863719219.gltf" id="2_0xm2m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
+albedo_color = Color(0.08235294, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
+
+[sub_resource type="Skin" id="Skin_0xm2m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+
+[node name="Main" type="Node3D" unique_id=340606481]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006316185, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1205461950]
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=566277154]
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=971593960]
+transform = Transform3D(177.1002, 0, 0, 0, 1.1483749, 0, 0, 0, 126.354, -0.19246274, 0, -0.03797841)
+material_override = SubResource("StandardMaterial3D_7dm0k")
+mesh = SubResource("BoxMesh_ig7tw")
+skin = SubResource("Skin_0xm2m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=1480070428]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14946324, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=2011475431]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 126, 0, 0, 1.5105293)
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=759700064]
+transform = Transform3D(1, 0, 0, 0, 1.303757, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=859914476]
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D" unique_id=986807079]
+transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742278e-08, 0, -0.99999994, 0, 1.5, 0)
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/SpringArm3D" unique_id=1145601478]
+transform = Transform3D(1, 0, 0, 0, 0.7861783, 0, 0, 0, 0.9850048, 0, 0, 0)
+fov = 84.74908
+
+[node name="AuxScene" parent="CharacterBody3D" unique_id=209297696 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(0.01, 0, 0, 0, 0.008, 0, 0, 0, 0.01, -0.921, 1.3472788, 0.625)
